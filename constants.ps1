@@ -1,0 +1,1 @@
+$env:MY_NAME = "BK"
