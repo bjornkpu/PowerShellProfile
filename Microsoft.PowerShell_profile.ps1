@@ -20,8 +20,8 @@ if ($host.Name -eq 'ConsoleHost') {
     }
 
     Set-PSReadLineOption -EditMode Windows
-    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+    Set-PSReadLineKeyHandler -Key UpArrow -Function PreviousHistory
+    Set-PSReadLineKeyHandler -Key DownArrow -Function NextHistory
     Set-PSReadLineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
     Set-PSReadLineKeyHandler -Key Alt+r -ScriptBlock {
         [Microsoft.PowerShell.PSConsoleReadLine]::ClearScreen()

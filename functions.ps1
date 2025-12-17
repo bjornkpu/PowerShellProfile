@@ -21,3 +21,9 @@ Set-Alias -Name back -Value Pop-Location
 function ff { param($name) Get-ChildItem -Recurse -Filter "*$name*" -ErrorAction SilentlyContinue | Select-Object FullName }
 
 function guid { (New-Guid).Guid.ToString() | Set-Clipboard }
+
+function mkcd {
+    param($path)
+    New-Item -ItemType Directory -Path $path -Force | Out-Null
+    Set-Location $path
+}
