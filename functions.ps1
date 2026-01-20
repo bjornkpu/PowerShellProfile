@@ -27,3 +27,9 @@ function mkcd {
     New-Item -ItemType Directory -Path $path -Force | Out-Null
     Set-Location $path
 }
+
+function check {
+    Write-Host "Running ruff check..." && uv run ruff check . --fix &&
+    Write-Host "Running ty check..." && uv run ty check . &&
+    Write-Host "Running pytest..." && uv run pytest
+}
