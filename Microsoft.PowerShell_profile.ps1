@@ -20,6 +20,7 @@ if ($host.Name -eq 'ConsoleHost') {
     }
 
     Set-PSReadLineOption -EditMode Windows
+    Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
     Set-PSReadLineKeyHandler -Key UpArrow -Function PreviousHistory
     Set-PSReadLineKeyHandler -Key DownArrow -Function NextHistory
     Set-PSReadLineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
