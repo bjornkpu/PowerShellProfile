@@ -1,2 +1,8 @@
 Modules/
 Scripts/
+
+# Environment variables and secrets
+env.ps1
+*.env
+*.secret
+*.key

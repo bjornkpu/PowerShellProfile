@@ -1,0 +1,8 @@
+# Files and folders that AI agents should not read
+# This helps protect sensitive information from being accessed by AI assistants
+
+env.ps1
+*.env
+*.secret
+*.key
+*secrets*

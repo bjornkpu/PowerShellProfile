@@ -7,6 +7,10 @@ foreach ($f in $coreFiles) {
     if (Test-Path $f) { . $f }
 }
 
+# Load environment variables (not in version control)
+$envFile = Join-Path $profileDir 'env.ps1'
+if (Test-Path $envFile) { . $envFile }
+
 if ($host.Name -eq 'ConsoleHost') {
     Import-Module PSReadLine
 
