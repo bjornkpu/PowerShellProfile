@@ -1,6 +1,6 @@
 # Load core profile scripts
 $profileDir = Split-Path -Parent $PROFILE
-$coreFiles = @('constants.ps1', 'aliases.ps1', 'functions.ps1') | ForEach-Object {
+$coreFiles = @('constants.ps1', 'aliases.ps1', 'functions.ps1', 'timeline.ps1') | ForEach-Object {
     Join-Path $profileDir $_
 }
 foreach ($f in $coreFiles) {
