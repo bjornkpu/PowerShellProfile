@@ -1,6 +1,6 @@
 # Load core profile scripts
 $profileDir = Split-Path -Parent $PROFILE
-$coreFiles = @('constants.ps1', 'aliases.ps1', 'functions.ps1', 'timeline.ps1') | ForEach-Object {
+$coreFiles = @('constants.ps1', 'aliases.ps1', 'functions.ps1', 'timeline.ps1', 'prompt.ps1') | ForEach-Object {
     Join-Path $profileDir $_
 }
 foreach ($f in $coreFiles) {
@@ -36,6 +36,20 @@ if ($host.Name -eq 'ConsoleHost') {
     Set-PSReadLineKeyHandler -Key Ctrl+s -Function ForwardSearchHistory
 }
 
-# $env:PS_DEV_MODE = $true
-$omp_config = $profileDir + "\oh-my-posh-themes\bkpuns.omp.json"
-oh-my-posh init pwsh --config $omp_config | Invoke-Expression
+$scriptblock = {
+    param($wordToComplete, $commandAst, $cursorPosition)
+    $Env:_TOBB_COMPLETE = "complete_powershell"
+    $Env:_TYPER_COMPLETE_ARGS = $commandAst.ToString()
+    $Env:_TYPER_COMPLETE_WORD_TO_COMPLETE = $wordToComplete
+    tobb | ForEach-Object {
+        $commandArray = $_ -Split ":::"
+        $command = $commandArray[0]
+        $helpString = $commandArray[1]
+        [System.Management.Automation.CompletionResult]::new(
+            $command, $command, 'ParameterValue', $helpString)
+    }
+    $Env:_TOBB_COMPLETE = ""
+    $Env:_TYPER_COMPLETE_ARGS = ""
+    $Env:_TYPER_COMPLETE_WORD_TO_COMPLETE = ""
+}
+Register-ArgumentCompleter -Native -CommandName tobb -ScriptBlock $scriptblock
