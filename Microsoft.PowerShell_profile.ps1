@@ -1,5 +1,5 @@
 # Load core profile scripts
-$profileDir = Split-Path -Parent $PROFILE
+$profileDir = $PSScriptRoot
 $coreFiles = @('constants.ps1', 'aliases.ps1', 'functions.ps1', 'timeline.ps1', 'prompt.ps1') | ForEach-Object {
     Join-Path $profileDir $_
 }
